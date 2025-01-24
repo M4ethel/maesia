@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>Maesia</title>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Messenger</h1>
+
+    <div id="room-controls">
+        <input type="text" id="username" placeholder="Enter your username">
+        <input type="text" id="room" placeholder="Enter the room's name">
+        <button id="join-btn">Join room</button>
+        <button id="leave-btn" disabled>Leave room</button>
+    </div>
+
+    <div id="messages">
+        <p id="placeholder">Messages appear right here</p>
+    </div>
+
+    <div id="controls">
+        <input type="text" id="message-input" placeholder="Type your message" disabled>
+        <button id="send-btn" disabled>Send message</button>
+       
+    </div>
+
+ <div id="sidebar">
+    <h3>Open rooms</h3>
+    <ul id="room-list">
+
+    </ul>
+</div>
+    <script src="{{ url_for('static', filename='maesia.js') }}"></script>
+</body>
+</html>
