@@ -112,6 +112,16 @@ socket.on("message", (data) => {
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 });
 
+socket.on("message_history", (history) => {
+    messagesDiv.innerHTML = "";
+    history.forEach((data) => {
+        const messageElement = document.createElement("div");
+        messageElement.innerHTML = `<strong>${data.username}:</strong> ${data.message} <em>${new Date(data.timestamp).toLocaleString()}</em>`;
+        messagesDiv.appendChild(messageElement);
+    });
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+});
+
 function appendMessage(data) {
     const messageElement = document.createElement("div");
     messageElement.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;

@@ -46,6 +46,12 @@ def handle_join(data):
       
         messages = Message.query.filter_by(room_id=room.id).order_by(Message.timestamp).all()
         for msg in messages:
+            history = [{
+                "username": msg.username, 
+                "message": msg.message, 
+                "timestamp": msg.timestamp.isoformat(),
+                       } for msg in messages
+                       ]
             emit("message", {
                 "username": msg.username,
                 "message": msg.message,
