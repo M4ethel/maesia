@@ -17,27 +17,27 @@ function removePlaceholder() {
     const placeholder = document.getElementById("placeholder");
     if (placeholder) {
         placeholder.remove();
-    }
+       }
 }
+        
+        
 
-async function fetchRooms() {
-    try {
-        const response = await fetch("/rooms");
-        const rooms = await response.json();
+function fetchRooms() {
+    fetch("/rooms")
+        .then((response) => response.json())
+        .then((rooms) => {
+            const roomList = document.getElementById("room-list");
+            roomList.innerHTML = "";
+            rooms.forEach((room) => {
+                const roomItem = document.createElement("li");
+                roomItem.textContent = room.name;
 
-        const roomList = document.getElementById("room-list");
-        roomList.innerHTML = "";
-
-        rooms.forEach((room) => {
-            const roomItem = document.createElement("li");
-            roomItem.textContent = room.name;
-            roomItem.addEventListener("click", () => joinRoom(room.name));
-            roomList.appendChild(roomItem);
-        });
-    } catch (error) {
-        console.error("Error fetching rooms:", error);
+                roomItem.addEventListener("click", () => joinRoom(room.name));
+                roomList.appendChild(roomItem);
+            });
+        })
+        .catch((error) => console.error("Error fetching rooms:", error));
     }
-}
 
 
  joinBtn.addEventListener("click", () => {
