@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room, send
 from datetime import datetime, timezone
-from models import db, Room, Message
+from models import db, os, Room, Message
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///messenger.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "48a49090a5df1c8c9b6b7016b99c7878"
 db.init_app(app)
