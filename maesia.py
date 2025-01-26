@@ -6,7 +6,7 @@ from models import db, Room, Message
 import os
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://maesia_db_user:yzfJujNyj5ffYBb984lDNYn0OD74LwQU@dpg-cub6mv1opnds73egu57g-a/maesia_db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "48a49090a5df1c8c9b6b7016b99c7878"
 db.init_app(app)
