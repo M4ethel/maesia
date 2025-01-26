@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room, send
+from flask_migrate import Migrate
 from datetime import datetime, timezone
 from models import db, Room, Message
 import os
@@ -10,7 +11,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "48a49090a5df1c8c9b6b7016b99c7878"
 db.init_app(app)
 socketio = SocketIO(app)
-
+migrate = Migrate(app, db)
 
 with app.app_context():
     db.create_all()
