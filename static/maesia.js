@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const socket = io("http://127.0.0.1:5001");
+const socket = io("https://maesia.onrender.com/");
 
 const joinBtn = document.getElementById("join-btn");
 const sendBtn = document.getElementById("send-btn");
