@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room, send
 from datetime import datetime, timezone
-from models import db, os, Room, Message
+from models import db, Room, Message
+import os
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
