@@ -10,7 +10,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://maesia_db_user:yzfJujNyj5f
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "48a49090a5df1c8c9b6b7016b99c7878"
 db.init_app(app)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 migrate = Migrate(app, db)
 
 with app.app_context():
