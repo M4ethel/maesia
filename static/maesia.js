@@ -8,6 +8,7 @@ const usernameInput = document.getElementById("username");
 const roomInput = document.getElementById("room");
 const messageInput = document.getElementById("message-input");
 const messagesDiv = document.getElementById("messages");
+const leaveBtn = document.getElementById("leave-btn");
 
 let currentRoom = null;
 let username = null;
@@ -58,9 +59,7 @@ async function fetchRooms() {
         leaveBtn.disabled = false;
 
         console.log ("joined room, message input enabled");
-    
 
-        const messagesDiv = document.getElementById("messages");
         messagesDiv.innerHTML = `<h3>Joined room: ${room}</h3>`;
     } else {
         alert("Enter BOTH a username and room name.");
@@ -69,11 +68,10 @@ async function fetchRooms() {
 });
 
 
-const leaveBtn = document.getElementById("leave-btn");
-    leaveBtn.addEventListener("click", () => {
+leaveBtn.addEventListener("click", () => {
         if (currentRoom) {
             socket.emit("leave_room", { username, room: currentRoom});
-            console.log(`left room: ${currentRoom}`);
+            console.log(`left room: ${currentRoom}`); // debug
             currentRoom = null;
             messagesDiv.innerHTML = `<p id="placeholder">Messages appear right here</p>`;
             messageInput.disabled = true;
@@ -88,8 +86,8 @@ sendBtn.addEventListener("click", () => {
     const message = messageInput.value.trim();
     if (message && currentRoom) {
         socket.emit("send_message", {
-            username: usernameInput.value.trim(),
-            message: message,
+            username,
+            message,
             room: currentRoom,
         });
 

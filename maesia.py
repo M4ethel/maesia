@@ -52,11 +52,7 @@ def handle_join(data):
                 "timestamp": msg.timestamp.isoformat(),
                        } for msg in messages
                        ]
-            emit("message", {
-                "username": msg.username,
-                "message": msg.message,
-                "timestamp": msg.timestamp.isoformat()
-            }, to=request.sid)
+            emit("message_history", history, to=request.sid)
     else:
         print("Invalid join_room data received.") 
 
