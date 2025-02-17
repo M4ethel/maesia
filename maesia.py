@@ -34,11 +34,11 @@ def handle_join(data):
 
 if username and room_name:
     room = Room.query.filter_by(name=room_name).first()
-        if not room:
-            print(f"Room {room_name} does not exist, creating new room.")  # Debug log
-            room = Room(name=room_name)
-            db.session.add(room)
-            db.session.commit()
+    if not room:
+        print(f"Room {room_name} does not exist, creating new room.")  # Debug log
+        room = Room(name=room_name)
+        db.session.add(room)
+        db.session.commit()
 
         join_room(room_name)
         send({"content": f"{username} has joined the room {room_name}"}, to=room_name, include_self=True)
