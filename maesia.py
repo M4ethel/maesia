@@ -53,9 +53,9 @@ def handle_join(data):
         "timestamp": msg.timestamp.isoformat()
     } for msg in messages]
     
-emit("message_history", history, to=request.sid)
-    else:
-        print("Invalid join_room data received.") 
+    emit("message_history", history, to=request.sid)
+        else:
+            print("Invalid join_room data received.") 
 
 @socketio.on("send_message")
 def handle_message(data):
