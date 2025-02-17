@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const socket = io.connect(window.location.origin);
+const socket = io.connect(window.location.origin, {
+    transports: ["websocket", "polling"]
+});
 
 const joinBtn = document.getElementById("join-btn");
 const sendBtn = document.getElementById("send-btn");
