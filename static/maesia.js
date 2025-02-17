@@ -42,7 +42,18 @@ function fetchRooms() {
     }
     document.addEventListener("DOMContentLoaded", fetchRooms);
     
+function joinRoom(roomName) {
+    if (!roomName) {
+        alert("Invalid room name");
+        return;
+    }
     
+    socket.emit("join_room", { username: username, room: roomName});
+    
+        document.getElementById("current-room").textContent = `Joined room: ${roomName}`;
+        document.getElementById("messageInput").disabled = false;
+        document.getElementById("sendBtn").disabled = false;
+        
 
 
  joinBtn.addEventListener("click", () => {
