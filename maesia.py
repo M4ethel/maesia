@@ -79,7 +79,7 @@ def handle_message(data):
         db.session.add(new_message)
         db.session.commit()
 
-        send({
+        emit("message", {
             "username": username,
             "message": message,
             "timestamp": timestamp.isoformat(),
