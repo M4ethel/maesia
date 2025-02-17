@@ -46,14 +46,12 @@ def handle_join(data):
 
       
         messages = Message.query.filter_by(room_id=room.id).order_by(Message.timestamp).all()
-        for msg in messages:
-            history = [{
-                "username": msg.username, 
-                "message": msg.message, 
-                "timestamp": msg.timestamp.isoformat(),
-                       } for msg in messages
-                       ]
-            emit("message_history", history, to=request.sid)
+        
+       history = [
+    {"username": msg.username, "message": msg.message, "timestamp": msg.timestamp.isoformat()}
+    for msg in messages
+]
+emit("message_history", history, to=request.sid)
     else:
         print("Invalid join_room data received.") 
 
@@ -86,7 +84,7 @@ def handle_message(data):
             "message": message,
             "timestamp": timestamp.isoformat(),
             "senderId": sender_id,
-        }, room=room_name, include_self=False)
+        }, room=room_name, include_self=True)
 
         print(f"Message from {username}: '{message}' saved to the database.")  
 
