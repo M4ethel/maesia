@@ -32,13 +32,13 @@ def handle_join(data):
 
     print(f"Join request received: username={username}, room_name={room_name}")  # Debug log
 
-if username and room_name:
-    room = Room.query.filter_by(name=room_name).first()
-    if not room:
-        print(f"Room {room_name} does not exist, creating new room.")  # Debug log
-        room = Room(name=room_name)
-        db.session.add(room)
-        db.session.commit()
+    if username and room_name:
+        room = Room.query.filter_by(name=room_name).first()
+        if not room:
+            print(f"Room {room_name} does not exist, creating new room.")  # Debug log
+            room = Room(name=room_name)
+            db.session.add(room)
+            db.session.commit()
 
         join_room(room_name)
         send({"content": f"{username} has joined the room {room_name}"}, to=room_name, include_self=True)
@@ -46,17 +46,16 @@ if username and room_name:
 
       
         messages = Message.query.filter_by(room_id=room.id).order_by(Message.timestamp).all()
-        
-    history = [{
-        "username": msg.username,
-        "message": msg.message,
-        "timestamp": msg.timestamp.isoformat()
-    } for msg in messages]
+        history = [{
+            "username": msg.username,
+            "message": msg.message,
+            "timestamp": msg.timestamp.isoformat()
+        } for msg in messages]
     
-    emit("message_history", history, to=request.sid)
+        emit("message_history", history, to=request.sid)
     
-else:
-    print("Invalid join_room data received.") 
+    else:
+        print("Invalid join_room data received.") 
 
 @socketio.on("send_message")
 def handle_message(data):
