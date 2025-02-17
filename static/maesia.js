@@ -53,8 +53,14 @@ function joinRoom(roomName) {
         document.getElementById("current-room").textContent = `Joined room: ${roomName}`;
         document.getElementById("messageInput").disabled = false;
         document.getElementById("sendBtn").disabled = false;
-        
 
+    // Clear previous messages
+    const messagesDiv = document.getElementById("messages");
+    messagesDiv.innerHTML = "";
+
+    // Fetch message history for the room
+    socket.emit("request_message_history", roomName);
+}
 
  joinBtn.addEventListener("click", () => {
     const room = roomInput.value.trim();
