@@ -48,3 +48,17 @@
     button:hover {
         background-color: #ff8da1;
     }
+    
+    .room-name {
+        cursor: pointer;
+        color: #ffdbe9;
+        text-decoration: underline;
+        margin: 5px 0;
+        display: block;
+        
+    .room-name:hover {
+        color: #ff8da1
+        text-decoration: none;
+    }
+        
+        
