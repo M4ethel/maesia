@@ -32,8 +32,8 @@ def handle_join(data):
 
     print(f"Join request received: username={username}, room_name={room_name}")  # Debug log
 
-    if username and room_name:
-        room = Room.query.filter_by(name=room_name).first()
+if username and room_name:
+    room = Room.query.filter_by(name=room_name).first()
         if not room:
             print(f"Room {room_name} does not exist, creating new room.")  # Debug log
             room = Room(name=room_name)
