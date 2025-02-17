@@ -28,9 +28,11 @@ function fetchRooms() {
         .then((rooms) => {
             const roomList = document.getElementById("room-list");
             roomList.innerHTML = "";
+            
             rooms.forEach((room) => {
-                const roomItem = document.createElement("li");
+                const roomItem = document.createElement("div");
                 roomItem.textContent = room.name;
+                roomItem.classList.add("room-name");
 
                 roomItem.addEventListener("click", () => joinRoom(room.name));
                 roomList.appendChild(roomItem);
@@ -38,6 +40,9 @@ function fetchRooms() {
         })
         .catch((error) => console.error("Error fetching rooms:", error));
     }
+    document.addEventListener("DOMContentLoaded", fetchRooms);
+    
+    
 
 
  joinBtn.addEventListener("click", () => {
