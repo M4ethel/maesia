@@ -54,8 +54,9 @@ def handle_join(data):
     } for msg in messages]
     
     emit("message_history", history, to=request.sid)
-        else:
-            print("Invalid join_room data received.") 
+    
+else:
+    print("Invalid join_room data received.") 
 
 @socketio.on("send_message")
 def handle_message(data):
